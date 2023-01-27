@@ -1,3 +1,3 @@
-enum Type{
-	Dog, Raccoon, Turtle, Goat
+public enum Type{
+	Dog, Raccoon, Cat, Songbird
 }
