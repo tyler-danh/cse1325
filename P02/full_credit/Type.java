@@ -1,3 +1,3 @@
 public enum Type{
-	Dog, Raccoon, Cat, Songbird
+	Dog, Raccoon, Cat, Robin
 }
