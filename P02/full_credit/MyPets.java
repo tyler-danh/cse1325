@@ -2,7 +2,7 @@
 
 public class MyPets{
 	public static void main(String[] args){
-		Type type;
+		clearType type;
 		Pet[] animal = new Pet[4];
 		
 		animal[0] = new Pet("Fluffy", 10, Type.Dog);

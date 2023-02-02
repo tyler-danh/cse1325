@@ -3,7 +3,7 @@
 public class MyPets{
 	public static void main(String[] args){
 		Type type;
-		Pet[] animal = new Pet[4];
+		Pet[] animal = new Pet[Integer.MAX_VALUE-1];
 		
 		animal[0] = new Pet("Fluffy", 10, Type.Dog);
 		animal[1] = new Pet("Blessedone", 2, Type.Tiger);
