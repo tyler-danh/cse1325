@@ -1,7 +1,7 @@
 public class Quiz{
-    private Question questions;
+    private ArrayList<Question> questions = new ArrayList<>();
 
-    public Quiz(){
+    public Quiz(Question questions){
         
     }
 }
