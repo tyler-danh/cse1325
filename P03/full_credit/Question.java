@@ -9,6 +9,7 @@ public class Question{
     private int rightAnswer;
 
     public int answer;
+    public int correctAnswers = 0;
 
     public Question(String question, ArrayList<String> answers, int rightAnswer){
         this.question = question;
@@ -17,13 +18,18 @@ public class Question{
 
         questionNumber = nextQuestionNumber++;
 
-        if(rightAnswer < answers || rightAnswer > answers)
-        throw new IllegalArgumentException("rightAnswer should be btween 1-4");
+        if(rightAnswer < 1 || rightAnswer > answers.size())
+        throw new IllegalArgumentException("rightAnswer should be between 1-4!");
 
     }
 
     public boolean checkanswer(int answer){
-        
+        if (answer.equals(rightAnswer)){
+            correctAnswers++;
+            return true;
+        }
+        else
+        return false;
     }
 
     @Override
