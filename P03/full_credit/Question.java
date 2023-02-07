@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Question{
     private static int nextQuestionNumber = 1;
@@ -9,7 +10,7 @@ public class Question{
     private int rightAnswer;
 
     public int answer;
-    public int correctAnswers = 0;
+    public double correctAnswers = 0;
 
     public Question(String question, ArrayList<String> answers, int rightAnswer){
         this.question = question;
@@ -23,8 +24,8 @@ public class Question{
 
     }
 
-    public boolean checkanswer(int answer){
-        if (answer.equals(rightAnswer)){
+    public boolean checkAnswer(int answer){
+        if (answer==rightAnswer){
             correctAnswers++;
             return true;
         }
@@ -34,6 +35,6 @@ public class Question{
 
     @Override
     public String toString(){
-        return question + "\n" + answers;
+        return questionNumber + question + "\n" + answers;
     }
 }
