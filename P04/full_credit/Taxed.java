@@ -4,7 +4,7 @@ public class Taxed extends Product{
         super(name, cost);
     }
 
-    public static setTaxRate(double salesTax){
+    public static void setTaxRate(double salesTax){
         tax = salesTax;
     }
 
