@@ -1,6 +1,6 @@
-public class Product{
+public abstract class Product{
     
-    public class Product(String name, double cost){
+    public Product(String name, double cost){
         this.cost = cost;
         this.name = name;
 
@@ -8,12 +8,14 @@ public class Product{
             throw new IllegalArgumentException("Cost: " + cost + " cannot be negative!");
         }
     }
-    public abstract class price{}
 
+    @Override
     public String toString() {
         StringBuilder item = new Stringbuilder("" + name + "(" + cost + ")" + "" + cost);
         return item.toString();
     }
+
+    public abstract double price();
 
     protected double cost;
     protected String name;
