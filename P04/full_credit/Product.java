@@ -1,8 +1,6 @@
 public class Product{
-    protected double cost;
-    protected String name;
-
-    public class Product{
+    
+    public class Product(String name, double cost){
         this.cost = cost;
         this.name = name;
 
@@ -12,9 +10,11 @@ public class Product{
     }
     public abstract class price{}
 
-    public string toString() {
+    public String toString() {
         StringBuilder item = new Stringbuilder("" + name + "(" + cost + ")" + "" + cost);
         return item.toString();
     }
 
+    protected double cost;
+    protected String name;
 }
