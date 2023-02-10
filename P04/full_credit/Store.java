@@ -6,8 +6,9 @@ import java.util.Scanner;
 public class Store{
     public static void main(String[] args){
         setSalesTax();
-        System.out.println("= = = = = = = = = = = = = = = = = = = =" + "\n" + "   Welcome to WAHMart   " + "\n"
-                                + "= = = = = = = = = = = = = = = = = = = =");
+        System.out.println("= = = = = = = = = = = = = = = = = = = =\n" 
+                                + "   Welcome to WAHMart    \n"
+                        + "= = = = = = = = = = = = = = = = = = = =\n");
         
     }
     private ArrayList<Product> products = new ArrayList<>(
