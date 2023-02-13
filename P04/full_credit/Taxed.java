@@ -10,7 +10,7 @@ public class Taxed extends Product{
 
     @Override
     public double price() {
-        return cost * tax;
+        return cost * (tax+1);
     }
 
     private static double tax = 0.0;

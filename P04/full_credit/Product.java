@@ -11,7 +11,7 @@ public abstract class Product{
 
     @Override
     public String toString() {
-        StringBuilder item = new StringBuilder("" + name + "(" + cost + ")" + "" + cost);
+        StringBuilder item = new StringBuilder("" + name + "(" + cost + ")" + "" + this.price() + "\n");
         return item.toString();
     }
 

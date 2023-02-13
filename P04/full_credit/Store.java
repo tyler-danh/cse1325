@@ -7,6 +7,7 @@ public class Store{
     public static void main(String[] args){
         Taxed.setTaxRate(0.08);
         Scanner input = new Scanner(System.in);
+        int selection;
 
         while(true){
             System.out.println("= = = = = = = = = = = = = = = = = = = =\n" 
@@ -20,6 +21,8 @@ public class Store{
                 System.out.println(i + p.toString());
                 ++i;
             }
+            System.out.println("Which would you like to purchase?");
+            selection = input.nextLine();
         }
         
     }
