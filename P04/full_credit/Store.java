@@ -10,25 +10,32 @@ public class Store{
         int selection;
 
         while(true){
+
             System.out.println("= = = = = = = = = = = = = = = = = = = =\n" 
                                 + "          Welcome to WAHMart    \n"
                         + "= = = = = = = = = = = = = = = = = = = =\n");
             for(Product p : products){
-                int i = 1;
-                p.price();
-                //System.out.printf("%d) %.2f\n", ++i , p.price());
-
-                System.out.println(i + p.toString());
-                ++i;
+                System.out.println((products.indexOf(p)) + ") " + p);
             }
             System.out.println("Which would you like to purchase?");
-            selection = input.nextLine();
+            selection = input.nextInt();
+            try{
+                shoppingCart.add(products.get(selection)); 
+            }catch(Exception e){
+                System.err.println("Invalid selection!");
+                System.exit(-2);
+            }
+            System.out.println("- - - - - - - - - -\n" 
+                                + "   Current Order\n");
+            for(Product s : shoppingCart){
+                System.out.println(s);
+            }
         }
         
     }
     private static ArrayList<Product> products = new ArrayList<>(
-           Arrays.asList(new Taxed("Coca-cola (2-liter)", 2.68), new Taxed("Cookies & Cream Ice Cream (half gallon)", 7.98), new Taxed("M&Ms Milk Chocolate (family size)", 6.98),
-                            new TaxFree("Milk (1-gallon)", 3.07), new TaxFree("Bread", 3.13), new TaxFree("Butter", 4.98)));
+           Arrays.asList(new Taxed("Coca-cola", 2.68), new Taxed("Ice Cream", 7.98), new Taxed("M&Ms Milk Chocolate", 6.98),
+                            new TaxFree("Milk", 3.07), new TaxFree("Bread", 3.13), new TaxFree("Butter", 4.98)));
 
     private static ArrayList<Product> shoppingCart = new ArrayList<>();
 }

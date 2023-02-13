@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 public abstract class Product{
     
     public Product(String name, double cost){
@@ -11,7 +12,7 @@ public abstract class Product{
 
     @Override
     public String toString() {
-        StringBuilder item = new StringBuilder("" + name + "(" + cost + ")" + "" + this.price() + "\n");
+        StringBuilder item = new StringBuilder("" + name + "(" + cost + ")" + "" + "\t" + decimal.format(this.price()) + "\n");
         return item.toString();
     }
 
@@ -19,4 +20,6 @@ public abstract class Product{
 
     protected double cost;
     protected String name;
+
+    private final DecimalFormat decimal = new DecimalFormat("0.00");
 }
