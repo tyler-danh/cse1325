@@ -24,12 +24,17 @@ public class Computer{
         for(Option o : options){
             result.append(o + " (" + o.cost + ")\n");
         }
-        return result;
+        return result.toString();
     }
 
     @Override
     public boolean equals(Object o){
-        
+        if(this == o)
+            return true;
+        if((o == null) || !(o instanceof Computer))
+            return false;
+        Computer c = (Computer) o;
+        return (c.toString().equals(o.toString()));
     }
 
     private String name;

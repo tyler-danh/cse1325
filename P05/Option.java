@@ -13,6 +13,7 @@ public class Option{
         return cost/100;
     }
 
+    @Override
     public boolean equals(Object o){
         if(this == o)
             return true;
