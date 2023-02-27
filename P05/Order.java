@@ -7,10 +7,13 @@ public class Order{
     public void addComputer(Computer computer){
 
     }
+    
     @Override
     public String toString(){
 
     }
+
+    @Override
     public boolean equals(Object o){
         
     }

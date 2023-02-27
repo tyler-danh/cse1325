@@ -10,17 +10,22 @@ public class Option{
     }
 
     public long cost(){
-        return cost/100.0;
+        return cost/100;
     }
 
     public boolean equals(Object o){
-        
+        if(this == o)
+            return true;
+        if((o == null) || !(o instanceof Option))
+            return false;
+        Option op = (Option) o;
+        return (name.equals(op.name) && cost == op.cost);
     }
 
     @Override
     public String toString(){
         StringBuilder result = new StringBuilder("" + name + " (" + cost() + ") ");
-        return options.toString();
+        return result.toString();
     }
 
     protected String name;

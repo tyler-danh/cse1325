@@ -4,14 +4,20 @@ public class Customer{
         this.name = name;
         this.email = email;
 
-        if(email.indexOf("@", 0) && email.indexOf(".", (email.indexOf("@", 0))) ){
+        if((emailConfirm == -1) || (emailConfirm2 == -1)){
             throw new IllegalArgumentException("Invalid Email");
         }
             
     }
 
+    @Override
     public boolean equals(Object o){
-        return true;
+        if(this == o)
+            return true;
+        if((o == null) || !(o instanceof Customer))
+            return false;
+        Customer c = (Customer) o;
+        return (email.equals(c.email) && name.equals(c.name));
     }
 
     @Override
@@ -22,5 +28,7 @@ public class Customer{
 
     private String name;
     private String email;
+    private int emailConfirm = email.indexOf("@", 0);
+    private int emailConfirm2 = email.indexOf(".", emailConfirm);
 
 }

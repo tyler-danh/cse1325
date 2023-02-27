@@ -7,17 +7,29 @@ public class Computer{
     }
 
     public void addOption(Option option){
-
+        options.add(option);
     }
+
     public long cost(){
-
+        long total = 0;
+        for(Option o : options){
+            total += o.cost;
+        }
+        return total;
     }
+
     @Override
     public String toString(){
-
+        StringBuilder result = new StringBuilder("" + name + " (" + model + ")\n");
+        for(Option o : options){
+            result.append(o + " (" + o.cost + ")\n");
+        }
+        return result;
     }
-    public boolean equals(Object o){
 
+    @Override
+    public boolean equals(Object o){
+        
     }
 
     private String name;
