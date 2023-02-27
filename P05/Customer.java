@@ -4,6 +4,8 @@ public class Customer{
         this.name = name;
         this.email = email;
 
+        int emailConfirm = email.indexOf("@", 0);
+        int emailConfirm2 = email.indexOf(".", emailConfirm);
         if((emailConfirm == -1) || (emailConfirm2 == -1)){
             throw new IllegalArgumentException("Invalid Email");
         }
@@ -28,7 +30,6 @@ public class Customer{
 
     private String name;
     private String email;
-    private int emailConfirm = email.indexOf("@", 0);
-    private int emailConfirm2 = email.indexOf(".", emailConfirm);
+    
 
 }
