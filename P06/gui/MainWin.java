@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
@@ -10,6 +11,9 @@ import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
+
+import store.Customer;
+
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
 import javax.swing.SwingConstants;   // useful values for Swing method calls
@@ -26,6 +30,8 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
+enum Record {CUSTOMER , OPTION , COMPUTER, ORDER};
+
 public class MainWin extends JFrame {
     public MainWin(String title) {
         super(title);
@@ -37,23 +43,33 @@ public class MainWin extends JFrame {
         // Add a menu bar to the PAGE_START area of the Border Layout
 
         JMenuBar menubar = new JMenuBar();
-        
+
         JMenu     file       = new JMenu("File");
-        JMenuItem anew       = new JMenuItem("New Game");
-        JMenuItem quit       = new JMenuItem("Quit");
+        JMenuItem quit       = new JmenuItem("Quit");
+        JMenu     insert     = new JMenu("Insert");
+        JMenuItem customer   = new JmenuItem("Add Customer");
+        JMenuItem option     = new JMenuItem("Add Option");
+        JMenuItem computer   = new JMenuItem("Add Computer");
+        JMenu     view       = new JMenu("View");
+        JMenuItem customers  = new JMenuItem("View Customers");
+        JMenuItem options    = new JMenuItem("View Options");
+        JMenuItem computers  = new JMenuItem("View Computers");
         JMenu     help       = new JMenu("Help");
-        JMenuItem rules      = new JMenuItem("Rules");
         JMenuItem about      = new JMenuItem("About");
-        
-        anew .addActionListener(event -> onNewGameClick());
+  
         quit .addActionListener(event -> onQuitClick());
-        rules.addActionListener(event -> onRulesClick());
+        customer.addActionListener(event -> onInsertCustomerClick());
+        option.addActionListener(event -> onInsertOptionClick());
+        computer.addActionListener(event -> onInsertComputerClick());
+        customers.addActionListener(event -> onViewClick(Record.CUSTOMER));
+        options.addActionListener(event -> onViewClick(Record.OPTION));
+        computers.addActionListener(event -> onViewClick(Record.COMPUTER));
         about.addActionListener(event -> onAboutClick());
 
         
-        file.add(anew);
+        //file.add(anew);
         file.add(quit);
-        help.add(rules);
+        //help.add(rules);
         help.add(about);
         
         menubar.add(file);
@@ -63,7 +79,7 @@ public class MainWin extends JFrame {
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
-        JToolBar toolbar = new JToolBar("Nim Controls");
+        /*JToolBar toolbar = new JToolBar("Nim Controls");
 
         // Add a New Game stock icon
         JButton anewB  = new JButton(UIManager.getIcon("FileView.fileIcon"));
@@ -118,15 +134,15 @@ public class MainWin extends JFrame {
           quitB.addActionListener(event -> onQuitClick());
         toolbar.addSeparator();
 
-        getContentPane().add(toolbar, BorderLayout.PAGE_START);
+        getContentPane().add(toolbar, BorderLayout.PAGE_START);*/
         
         
         // /////////////////////////// ////////////////////////////////////////////
-        // S T I C K S   D I S P L A Y
+        // C O M P U T E R S   D I S P L A Y
         // Provide a text entry box to show the remaining sticks
-        sticks = new JLabel();
-        sticks.setFont(new Font("SansSerif", Font.BOLD, 18));
-        add(sticks, BorderLayout.CENTER);
+        store = new JLabel();
+        store.setFont(new Font("SansSerif", Font.BOLD, 18));
+        add(store, BorderLayout.CENTER);
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
         // Provide a status bar for game messages
@@ -138,13 +154,48 @@ public class MainWin extends JFrame {
         
         // Start a new game
         onNewGameClick();
+        store = new Store();
     }
     
     // Listeners
+
+    protected void onInsertCustomerClick(){
+        Customer customer;
+        String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", PLAIN_MESSAGE);
+        String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", PLAIN_MESSAGE);
+        try{
+            customer = Customer(name, email);
+            store.add(customer);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
+        }
+
+    }
+
+    protected void onInsertOptionClick(){
+        Option option;
+        String name = showInputDialog(this, "Enter Option");
+        String sCost = showInputDialog(this, "Enter Cost");
+
+        double dCost = (double) sCost;
+        dCost*=100;
+
+        long lCost = (long)dCost;
+        try{
+            option = Option(name, lCost);
+            store.add(option);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
+        }
+    }
+
+    protected void onInsertComputerClick(){
+        Computer computer;
+        
+    }
     
     protected void onNewGameClick() {         // Create a new game
-        nim = new Nim();
-        setSticks();
+        store = new Store();
         msg.setFont(new JLabel().getFont());    // Reset to default font
     }
     
@@ -283,9 +334,9 @@ public class MainWin extends JFrame {
         button3.setEnabled(nim.sticksLeft() > 2);
     }
     
-    private Nim nim;
+    private Store store;
     
-    private JLabel sticks;                  // Display of sticks on game board
+    private JLabel display;                 
     private JLabel msg;                     // Status message display
     private JButton button1;                // Button to select 1 stick
     private JButton button2;                // Button to select 2 sticks
