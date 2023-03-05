@@ -30,7 +30,7 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
-enum Record {CUSTOMER , OPTION , COMPUTER, ORDER};
+enum Record {CUSTOMER, OPTION, COMPUTER, ORDER};
 
 public class MainWin extends JFrame {
     public MainWin(String title) {
@@ -151,18 +151,20 @@ public class MainWin extends JFrame {
         
         // Make everything in the JFrame visible
         setVisible(true);
-        
-        // Start a new game
-        onNewGameClick();
+         
         store = new Store();
+
+        onInsertCustomerClick();
+        onInsertOptionClick();
+        onInsertComputerClick();
     }
     
     // Listeners
 
     protected void onInsertCustomerClick(){
         Customer customer;
-        String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", PLAIN_MESSAGE);
-        String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", PLAIN_MESSAGE);
+        String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
+        String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", JOptionPane.PLAIN_MESSAGE);
         try{
             customer = Customer(name, email);
             store.add(customer);
@@ -199,21 +201,10 @@ public class MainWin extends JFrame {
         msg.setFont(new JLabel().getFont());    // Reset to default font
     }
     
-    protected void onButtonClick(int button) {  // Select 1, 2, or 3 sticks from pile
-        try {
-            // Catch the "impossible" out of sticks exception
-            nim.takeSticks(button);
-            setSticks();
-        } catch(Exception e) {
-            sticks.setText("FAIL: " + e.getMessage() + ", start new game");
-        }
+    protected void onViewClick() {  // Select 1, 2, or 3 sticks from pile
+       
     }
             
-    protected void onComputerPlayerClick() {   // Enable / disable computer player
-        setSticks();
-        // Java Swing requires action to visually indicate enabled / disabled button
-        computerPlayer.setBorder(computerPlayer.isSelected() ? BorderFactory.createLineBorder(Color.black) : null);
-    }
     protected void onRulesClick() {             // Show the rules
         String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
             "The two players alternate taking 1 to 3 sticks from the pile.\n" +
@@ -230,8 +221,8 @@ public class MainWin extends JFrame {
         }
         
         JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Nim</font></p>"
-          + "<p>Version 1.4J</p>"
+          + "<p><font size=+4>ELSA</font></p>"
+          + "<p>Version 0.69</p>"
            + "</html>",
           SwingConstants.CENTER);
 
@@ -246,96 +237,15 @@ public class MainWin extends JFrame {
           
          JOptionPane.showMessageDialog(this, 
              new Object[]{logo, title, artists},
-             "The Game of Nim",
+             "ELSA",
              JOptionPane.PLAIN_MESSAGE
          );
      }
 
-/*
-    // This is an alternate About dialog using JDialog instead of JOptionPane
-    
-    protected void onAboutClick() {                 // Display About dialog
-        JDialog about = new JDialog();
-        about.setLayout(new FlowLayout());
-        about.setTitle("The Game of Nim");
-        
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
-            JLabel logo = new JLabel(new ImageIcon(myPicture));
-            about.add(logo);
-        } catch(IOException e) {
-        }
-        
-        JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Nim</font></p>"
-          + "</html>");
-        about.add(title);
 
-        JLabel artists = new JLabel("<html>"
-          + "<p>Version 1.4J</p>"
-          + "<p>Copyright 2017-2023 by George F. Rice</p>"
-          + "<p>Licensed under Gnu GPL 3.0</p>"
-          + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-          + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-          + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-          + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
-          + "</html>");
-        about.add(artists);
-
-        JButton ok = new JButton("OK");
-        ok.addActionListener(event -> about.setVisible(false));
-        about.add(ok);
-        
-        about.setSize(450,400);
-        about.setVisible(true);
-     }
-*/
     protected void onQuitClick() {System.exit(0);}   // Exit the game
-
-    private void setSticks() {              // Update display, robot move
-        // s collects the status message
-        String s = "";
-        
-        // If the robot is enabled and it's their turn, move the robot
-        if(nim.sticksLeft() > 0) {
-            if(computerPlayer.isSelected() && nim.currentPlayer() == 2) {
-                int move = 1;
-                try {
-                    move = nim.optimalMove();
-                } catch(Exception e) {
-                    System.err.println("Invalid optimal move: " + e.getMessage());
-                }
-                s += "Robot plays " + move + ", ";
-                nim.takeSticks(move);
-            }
-        }
-        
-        // Report who's turn it is, or (if all sticks gone) who won
-        
-        if (nim.sticksLeft() > 0) {
-            s += "Player " + nim.currentPlayer() + "'s turn";
-        } else {
-            s += "Player " + nim.currentPlayer() +  " wins!";
-            msg.setFont(new Font("SansSerif", Font.BOLD, 18));
-        }
-        
-        // Display the collected status on the status bar
-        msg.setText(s);
-
-        // Update the visual display of sticks
-        s = "";
-        for(int i=0; i<nim.sticksLeft(); ++i) s += ("| ");
-        s += "  (" + (nim.sticksLeft()) + " sticks)";
-        sticks.setText(s);
-
-        // Set sensitivity of the human stick selectors so user can't make an illegal move
-        button1.setEnabled(nim.sticksLeft() > 0);
-        button2.setEnabled(nim.sticksLeft() > 1);
-        button3.setEnabled(nim.sticksLeft() > 2);
-    }
     
     private Store store;
-    
     private JLabel display;                 
     private JLabel msg;                     // Status message display
     private JButton button1;                // Button to select 1 stick
