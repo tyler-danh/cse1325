@@ -156,7 +156,7 @@ public class MainWin extends JFrame {
         // Make everything in the JFrame visible
         setVisible(true);
          
-        store = new Store();
+        store = new Store("ELSA");
 
         onInsertCustomerClick();
         onInsertOptionClick();
@@ -166,11 +166,10 @@ public class MainWin extends JFrame {
     // Listeners
 
     protected void onInsertCustomerClick(){
-        Customer customer;
         String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
         String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", JOptionPane.PLAIN_MESSAGE);
+        Customer customer = new Customer(name,email);
         try{
-            store.Customer(name, email);
             store.add(customer);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
@@ -179,17 +178,15 @@ public class MainWin extends JFrame {
     }
 
     protected void onInsertOptionClick(){
-        store.Option option;
+        
         String name = JOptionPane.showInputDialog(this, "Enter Option", "Cost", JOptionPane.PLAIN_MESSAGE);
         String sCost = JOptionPane.showInputDialog(this, "Enter Cost", "Cost", JOptionPane.PLAIN_MESSAGE);
-
         int iCost = Integer.parseInt(sCost);
         double dCost = (double)iCost;
         dCost*=100;
-
         long lCost = (long)dCost;
+        Option option = new Option(name, lCost);
         try{
-            option = Option.Option(name, lCost);
             store.add(option);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
@@ -201,17 +198,10 @@ public class MainWin extends JFrame {
         
     }
     
-    protected void onViewClick() { 
+    protected void onViewClick(Record CUSTOMER) { 
        
     }
             
-    protected void onRulesClick() {             // Show the rules
-        String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
-            "The two players alternate taking 1 to 3 sticks from the pile.\n" +
-            "The goal is to force your opponent to take the last stick (called misère rules).\n" +
-            "If the computer button is up, it's a two player game. If down, the computer is always Player 2.)";
-        JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
-    }
     protected void onAboutClick() {                 // Display About dialog
         JLabel logo = null;
         try {
