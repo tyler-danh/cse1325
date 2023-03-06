@@ -13,6 +13,10 @@ import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
 
 import store.Customer;
+import store.Store;
+import store.Option;
+import store.Order;
+import store.Computer;
 
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
@@ -45,9 +49,9 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
 
         JMenu     file       = new JMenu("File");
-        JMenuItem quit       = new JmenuItem("Quit");
+        JMenuItem quit       = new JMenuItem("Quit");
         JMenu     insert     = new JMenu("Insert");
-        JMenuItem customer   = new JmenuItem("Add Customer");
+        JMenuItem customer   = new JMenuItem("Add Customer");
         JMenuItem option     = new JMenuItem("Add Option");
         JMenuItem computer   = new JMenuItem("Add Computer");
         JMenu     view       = new JMenu("View");
@@ -166,7 +170,7 @@ public class MainWin extends JFrame {
         String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.PLAIN_MESSAGE);
         String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", JOptionPane.PLAIN_MESSAGE);
         try{
-            customer = Customer(name, email);
+            store.Customer(name, email);
             store.add(customer);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
@@ -175,16 +179,17 @@ public class MainWin extends JFrame {
     }
 
     protected void onInsertOptionClick(){
-        Option option;
-        String name = showInputDialog(this, "Enter Option");
-        String sCost = showInputDialog(this, "Enter Cost");
+        store.Option option;
+        String name = JOptionPane.showInputDialog(this, "Enter Option", "Cost", JOptionPane.PLAIN_MESSAGE);
+        String sCost = JOptionPane.showInputDialog(this, "Enter Cost", "Cost", JOptionPane.PLAIN_MESSAGE);
 
-        double dCost = (double) sCost;
+        int iCost = Integer.parseInt(sCost);
+        double dCost = (double)iCost;
         dCost*=100;
 
         long lCost = (long)dCost;
         try{
-            option = Option(name, lCost);
+            option = Option.Option(name, lCost);
             store.add(option);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Invalid Entry", 2);
@@ -196,12 +201,7 @@ public class MainWin extends JFrame {
         
     }
     
-    protected void onNewGameClick() {         // Create a new game
-        store = new Store();
-        msg.setFont(new JLabel().getFont());    // Reset to default font
-    }
-    
-    protected void onViewClick() {  // Select 1, 2, or 3 sticks from pile
+    protected void onViewClick() { 
        
     }
             
@@ -227,12 +227,8 @@ public class MainWin extends JFrame {
           SwingConstants.CENTER);
 
         JLabel artists = new JLabel("<html>"
-          + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
+          + "<br/><p>Copyright 2023 by Tyler Danh</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
-          + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-          + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-          + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-          + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
           + "</html>");
           
          JOptionPane.showMessageDialog(this, 
