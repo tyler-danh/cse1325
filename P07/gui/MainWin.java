@@ -257,6 +257,25 @@ public class MainWin extends JFrame {
         JLabel artists = new JLabel("<html>"
           + "<br/><p>Copyright 2023 by Tyler Danh</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
+          
+          + "<br/><p>Add Customer icon based on work by Dreamstate per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/user_3114957</font></p>"
+
+          + "<br/><p>View Customers icon based on work by Ilham Fitrotul Hayat per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/group_694642</font></p>"
+
+          + "<br/><p>Add Option icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/quantum-computing_4103999</font></p>"
+
+          + "<br/><p>View Options icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/edge_8002173</font></p>"
+
+          + "<br/><p>Add Computer icon based on work by Freepik per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/laptop_689396</font></p>"
+
+          + "<br/><p>View Computers icon based on work by Futuer per the Flaticon License</p>"
+          + "<p><font size=-2>https://www.flaticon.com/free-icon/computer-networks_9672993</font></p>"
+ 
           + "</html>");
           
          JOptionPane.showMessageDialog(this, 
