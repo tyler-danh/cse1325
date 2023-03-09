@@ -50,6 +50,10 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
 
         JMenu     file       = new JMenu("File");
+        JMenuItem newb       = new JMenuItem("New Store");
+        JMenuItem save       = new JMenuItem("Save Store");
+        JMenuItem saveAs     = new JMenuItem("Save As");
+        JMenuItem load       = new JMenuItem("Load Store");
         JMenuItem quit       = new JMenuItem("Quit");
         JMenu     insert     = new JMenu("Insert");
         JMenuItem customer   = new JMenuItem("Add Customer");
@@ -70,9 +74,17 @@ public class MainWin extends JFrame {
         options.addActionListener(event -> onViewClick(Record.OPTION));
         computers.addActionListener(event -> onViewClick(Record.COMPUTER));
         about.addActionListener(event -> onAboutClick());
+        newb.addActionListener(event -> onNewClick());
+        load.addActionListener(event -> onLoadClick());
+        save.addActionListener(event -> onSaveClick());
+        saveAs.addActionListener(event -> onSaveAsClick());
 
         
         //file.add(anew);
+        file.add(newb);
+        file.add(save);
+        file.add(saveAs);
+        file.add(load);
         file.add(quit);
         //help.add(rules);
         help.add(about);
@@ -150,6 +162,21 @@ public class MainWin extends JFrame {
     }
     
     // Listeners
+    protected void onNewClick(){
+        
+    }
+
+    protected void onSaveClick(){
+
+    }
+
+    protected void onSaveAsClick(){
+
+    }
+
+    protected void onLoadClick(){
+
+    }
 
     protected void onInsertCustomerClick(){
         String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.QUESTION_MESSAGE);
