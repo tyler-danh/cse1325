@@ -1,7 +1,20 @@
 package store;
 import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Store {
+
+    public void save(BufferedWriter bw){
+        bw.write(s + '\n');
+        bw.write("" + i + '\n');
+        bw.write(options.size() + '\n');
+        
+    }
+
     public Store(String name) {
         this.name = name;
     }
