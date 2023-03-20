@@ -1,5 +1,8 @@
 package store;
 import java.util.ArrayList;
+
+import javax.swing.text.html.Option;
+
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -8,12 +11,24 @@ import java.io.IOException;
 
 public class Store {
 
-    public void save(BufferedWriter bw){
-        bw.write(s + '\n');
-        bw.write("" + i + '\n');
-        bw.write(options.size() + '\n');
+    public void save(BufferedWriter bw)throws IOException{
+        bw.write("" + name + '\n');
+        bw.write("" + options.size() + '\n');
+        for(Options options : options) options.save(bw);
+        bw.write("" + customers.size() + '\n');
+        for(Customers customers : customers) customers.save(bw);
         
     }
+
+    public Store(BufferedReader br)throws IOException{
+        String s = br.readLine();
+        //int i = Integer.parseInt(br.readLine());
+        long l = Long.parseLong(br.readLine());
+        double d = Double.parseDouble(br.readLine());
+        int size = Integer.parseInt(br.readLine());
+        while(size-->0) options.add(new Option(br));
+        while(size-->0) customers.add(new Customer(br));
+        }
 
     public Store(String name) {
         this.name = name;

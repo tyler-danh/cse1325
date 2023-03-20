@@ -170,7 +170,7 @@ public class MainWin extends JFrame {
     
     // Listeners
     protected void onNewClick(){
-        
+        store = new Store("ELSA");
     }
 
     protected void onSaveClick(){
@@ -188,7 +188,7 @@ public class MainWin extends JFrame {
     protected void onInsertCustomerClick(){
         String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.QUESTION_MESSAGE);
         String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", JOptionPane.QUESTION_MESSAGE);
-        Customer customer = new Customer(name,email);
+        Customer customer = new Customer(name, email);
         try{
             store.add(customer);
             onViewClick(Record.CUSTOMER);
@@ -324,5 +324,6 @@ public class MainWin extends JFrame {
     
     private Store store;
     private JLabel display;
+    private File filename;
 
 }
