@@ -14,14 +14,14 @@ public class Store {
     public void save(BufferedWriter bw)throws IOException{
         bw.write("" + name + '\n');
         bw.write("" + options.size() + '\n');
-        for(Options options : options) options.save(bw);
+        for(Option options : options) options.save(bw);
         bw.write("" + customers.size() + '\n');
-        for(Customers customers : customers) customers.save(bw);
+        for(Customer customers : customers) customers.save(bw);
         
     }
 
     public Store(BufferedReader br)throws IOException{
-        String s = br.readLine();
+        this.name = br.readLine();
         //int i = Integer.parseInt(br.readLine());
         long l = Long.parseLong(br.readLine());
         double d = Double.parseDouble(br.readLine());
