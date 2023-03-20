@@ -35,12 +35,15 @@ import java.awt.Color;               // the color of widgets, text, or borders
 import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
-
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 enum Record {CUSTOMER, OPTION, COMPUTER, ORDER};
 
@@ -174,15 +177,54 @@ public class MainWin extends JFrame {
     }
 
     protected void onSaveClick(){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+            bw.write(MAGIC_COOKIE + '\n');
+            bw.write(FILE_VERSION + '\n');
+            nim.save(bw);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Unable to save " + filename + '\n' + e,
+                "ERROR", JOptionPane.ERROR_MESSAGE); 
+        }
 
     }
 
     protected void onSaveAsClick(){
-
+        final JFileChooser fc = new JFileChooser(filename);  
+        FileFilter elsaFiles = new FileNameExtensionFilter("ELSA files", "ELSA");
+        fc.addChoosableFileFilter(elsaFiles);         
+        fc.setFileFilter(elsaFiles);                  
+        
+        int result = fc.showSaveDialog(this);        
+        if (result == JFileChooser.APPROVE_OPTION) { 
+            filename = fc.getSelectedFile();         
+            if(!filename.getAbsolutePath().endsWith(".elsa"))  
+                filename = new File(filename.getAbsolutePath() + ".elsa");
+            onSaveGameClick();                       
+        }
     }
 
     protected void onLoadClick(){
-
+        final JFileChooser fc = new JFileChooser(filename);  
+        FileFilter elsaFiles = new FileNameExtensionFilter("ELSA files", "ELSA");
+        fc.addChoosableFileFilter(elsaFiles);         
+        fc.setFileFilter(elsaFiles);                  
+        
+        int result = fc.showOpenDialog(this);        
+        if (result == JFileChooser.APPROVE_OPTION) { 
+            filename = fc.getSelectedFile();        
+            
+            try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+                String magicCookie = br.readLine();
+                if(!magicCookie.equals(MAGIC_COOKIE)) throw new RuntimeException("Not an ELSA file");
+                String fileVersion = br.readLine();
+                if(!fileVersion.equals(FILE_VERSION)) throw new RuntimeException("Incompatible ELSA file format");
+                
+                store = new Store(br);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Unable to open " + filename + '\n' + e, 
+                    "ERROR", JOptionPane.ERROR_MESSAGE); 
+             }
+        }
     }
 
     protected void onInsertCustomerClick(){
@@ -325,5 +367,6 @@ public class MainWin extends JFrame {
     private Store store;
     private JLabel display;
     private File filename;
-
+    private String MAGIC_COOKIE = "LETITGO";
+    private String FILE_VERSION = "0.69";
 }
