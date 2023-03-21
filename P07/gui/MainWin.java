@@ -19,6 +19,10 @@ import store.Option;
 import store.Order;
 import store.Computer;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
 import javax.swing.SwingConstants;   // useful values for Swing method calls
@@ -227,6 +231,16 @@ public class MainWin extends JFrame {
         }
     }
 
+    @Override
+    public void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+        Grahpics2d g = (Graphics2D) graphics.create();
+        g.setColor(Color.ORANGE);
+        g.drawLine();
+        g.setColor(Color.YELLOW);
+        g.drawLine();
+    }
+
     protected void onInsertCustomerClick(){
         String name = JOptionPane.showInputDialog(this, "Enter Customer Name", "New Customer", JOptionPane.QUESTION_MESSAGE);
         String email = JOptionPane.showInputDialog(this, "Enter Customer Email", "New Customer", JOptionPane.QUESTION_MESSAGE);
@@ -316,7 +330,8 @@ public class MainWin extends JFrame {
       display.setText(sb.toString());
     }
             
-    protected void onAboutClick() {                 // Display About dialog
+    protected void onAboutClick() { 
+        Canvas canvas = new Canvas();                // Display About dialog
         JLabel logo = null;
         try {
             BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
@@ -355,7 +370,7 @@ public class MainWin extends JFrame {
           + "</html>");
           
          JOptionPane.showMessageDialog(this, 
-             new Object[]{logo, title, artists},
+             new Object[]{canvas, logo, title, artists},
              "ELSA",
              JOptionPane.PLAIN_MESSAGE
          );
