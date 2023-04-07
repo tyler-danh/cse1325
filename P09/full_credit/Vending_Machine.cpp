@@ -1,16 +1,18 @@
 #include <iostream>
 #include <vector>
 
-class Vending_Machine(){
+class Vending_Machine:public Item{
     public:
-        add(std::string name){
-
+        void add(std::string name, int price){
+            items.push_back(name, price);
         }
-        buy(int index){
-
+        void buy(int index){
+            std::cout << "#### Buying: " << items[index] << std::endl;
         }
-        menu(std::string){
-
+        std::string menu(){
+            for(auto& i; items){
+                std::cout << i << ") "<< items[i].to_string() << std::endl;
+            }
         }
     private:
         std::vector<Item> items;
