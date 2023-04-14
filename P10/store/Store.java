@@ -22,7 +22,6 @@ public class Store {
 
     public Store(BufferedReader br)throws IOException{
         this.name = br.readLine();
-        //int i = Integer.parseInt(br.readLine());
         long l = Long.parseLong(br.readLine());
         double d = Double.parseDouble(br.readLine());
         int size = Integer.parseInt(br.readLine());
@@ -36,9 +35,7 @@ public class Store {
     public String name() {
         return this.name;
     }
-    
-    // ///////////////////////////////////////////////////////////
-    // Customers
+
     
     public void add(Customer customer) {
         if(!customers.contains(customer)) customers.add(customer);
@@ -46,9 +43,7 @@ public class Store {
     public Object[] customers() {
         return this.customers.toArray();
     }
-    
-    // ///////////////////////////////////////////////////////////
-    // Options
+
     
     public void add(Option option) {
         if(!options.contains(option)) options.add(option);
@@ -56,9 +51,7 @@ public class Store {
     public Object[] options() {
         return this.options.toArray();
     }
-    
-    // ///////////////////////////////////////////////////////////
-    // Computers
+
     
     public void add(Computer computer) {
         if(!computers.contains(computer)) computers.add(computer);
@@ -67,9 +60,7 @@ public class Store {
         return this.computers.toArray();
     }
     
-    // ///////////////////////////////////////////////////////////
-    // Orders
-    
+
     public void add(Order order) {
         if(!orders.contains(order)) orders.add(order);
     }
@@ -77,8 +68,6 @@ public class Store {
         return this.orders.toArray();
     }
 
-    // ///////////////////////////////////////////////////////////
-    // Fields
     
     private String name;
     private ArrayList<Customer> customers = new ArrayList<>();

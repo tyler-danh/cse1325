@@ -1,4 +1,8 @@
 package store;
+import java.BufferedReader;
+import java.BufferedWriter;
+import java.IOException;
+
 public class Option{
 
     public Option(String name, long cost){
@@ -8,6 +12,15 @@ public class Option{
         if(cost<0){
             throw new IllegalArgumentException("Cost cannot be negative");
         }
+    }
+
+    public Option(BufferedReader br) throws IOException {
+        this.name = br.readLine();
+        this.cost = Long.parseLong(br.readLine());
+    }
+    public void save(BufferedWriter bw) throws IOException {
+        bw.write(name + '\n');
+        bw.write("" + Long.toString(cost) + '\n');
     }
 
     public long cost(){

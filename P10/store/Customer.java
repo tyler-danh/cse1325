@@ -1,16 +1,29 @@
 package store;
+import java.BufferedReader;
+import java.BufferedWriter;
+import java.IOException;
+
 public class Customer{
 
     public Customer(String name, String email){
-        this.name = name;
-        this.email = email;
-
         int emailConfirm = email.indexOf("@", 0);
         int emailConfirm2 = email.indexOf(".", emailConfirm);
         if((emailConfirm == -1) || (emailConfirm2 == -1)){
             throw new IllegalArgumentException("Invalid Email");
         }
+        this.name = name;
+        this.email = email;
            
+    }
+
+    public Customer(BufferedReader br) throws IOException {
+        this.name = br.readLine();
+        this.email = br.readLine();
+    }
+
+    public void save(BufferedWriter bw) throws IOException {
+        bw.write(name + '\n');
+        bw.write(email + '\n');
     }
 
     @Override

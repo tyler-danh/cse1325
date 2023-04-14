@@ -7,6 +7,22 @@ public class Order{
         this.orderNumber = nextOrderNumber;
     }
 
+    public Order(BufferedReader br) throws IOException {
+        this.orderNumber = Long.parseLong(br.readLine());
+        if(nextOrderNumber <= orderNumber) nextOrderNumber = orderNumber + 1;
+        this.customer = new Customer(br);
+        int numOptions = Integer.parseInt(br.readLine());
+        while(numOptions-- > 0)
+            computers.add(new Computer(br));
+    }
+    public void save(BufferedWriter bw) throws IOException {
+        bw.write(Long.toString(orderNumber) + '\n');
+        this.customer.save(bw);
+        bw.write(computers.size() + '\n');
+        for(Computer computer : computers)
+            computer.save(bw);
+    }
+
     public void addComputer(Computer computer){
         computers.add(computer);
     }
