@@ -184,7 +184,7 @@ public class MainWin extends JFrame {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
             bw.write(MAGIC_COOKIE + '\n');
             bw.write(FILE_VERSION + '\n');
-            nim.save(bw);
+            store.save(bw);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Unable to save " + filename + '\n' + e,
                 "ERROR", JOptionPane.ERROR_MESSAGE); 
@@ -229,16 +229,6 @@ public class MainWin extends JFrame {
                     "ERROR", JOptionPane.ERROR_MESSAGE); 
              }
         }
-    }
-
-    @Override
-    public void paintComponent(Graphics graphics){
-        super.paintComponent(graphics);
-        Grahpics2d g = (Graphics2D) graphics.create();
-        g.setColor(Color.ORANGE);
-        g.drawLine();
-        g.setColor(Color.YELLOW);
-        g.drawLine();
     }
 
     protected void onInsertCustomerClick(){
@@ -349,8 +339,8 @@ public class MainWin extends JFrame {
           + "<br/><p>Copyright 2023 by Tyler Danh</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
           
-          + "<br/><p>Add Customer icon based on work by Dreamstate per the Flaticon License</p>"
-          + "<p><font size=-2>https://www.flaticon.com/free-icon/user_3114957</font></p>"
+          + "<br/><p>Add customer from mohamed_hassan per the Content License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/icon-shopping-people-consumer-4500650/</font></p>"
 
           + "<br/><p>View Customers icon based on work by Ilham Fitrotul Hayat per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/group_694642</font></p>"
@@ -361,11 +351,14 @@ public class MainWin extends JFrame {
           + "<br/><p>View Options icon based on work by Freepik per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/edge_8002173</font></p>"
 
-          + "<br/><p>Add Computer icon based on work by Freepik per the Flaticon License</p>"
-          + "<p><font size=-2>https://www.flaticon.com/free-icon/laptop_689396</font></p>"
+          + "<br/><p>Add computer from Clker-Free-Vector-Images per the Content License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/lcd-monitor-computer-32872/</font></p>"
 
           + "<br/><p>View Computers icon based on work by Futuer per the Flaticon License</p>"
           + "<p><font size=-2>https://www.flaticon.com/free-icon/computer-networks_9672993</font></p>"
+
+          + "<br/><p>file_icon from janjf93 per the Content License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/folder-flat-design-icon-symbol-2103508/</font></p>"
  
           + "</html>");
           
@@ -387,6 +380,3 @@ public class MainWin extends JFrame {
 }
 
 
-//file_icon from janjf93 per the Content License https://pixabay.com/vectors/folder-flat-design-icon-symbol-2103508/
-//add_computer from Clker-Free-Vector-Images per the Content License https://pixabay.com/vectors/lcd-monitor-computer-32872/
-//add_customer from mohamed_hassan per the Content License https://pixabay.com/vectors/icon-shopping-people-consumer-4500650/
