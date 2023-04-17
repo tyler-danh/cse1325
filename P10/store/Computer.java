@@ -1,8 +1,8 @@
 package store;
 import java.util.ArrayList;
-import java.IOException;
-import java.BufferedReader;
-import java.BufferedWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Computer{
     public Computer(String name, String model){

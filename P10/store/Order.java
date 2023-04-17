@@ -1,5 +1,9 @@
 package store;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+
 
 public class Order{
     public Order(Customer customer){
@@ -25,6 +29,12 @@ public class Order{
 
     public void addComputer(Computer computer){
         computers.add(computer);
+    }
+
+    public double totalCost(ArrayList<Computer> computers){
+        double total = 0;
+        for(Computer computer : computers){total+=computer.cost;}
+        return total;
     }
     
     @Override

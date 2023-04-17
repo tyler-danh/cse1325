@@ -10,6 +10,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 public class Store {
+    
+    public Store(String name) {
+        this.name = name;
+    }
 
     public void save(BufferedWriter bw)throws IOException{
         bw.write("" + name + '\n');
@@ -29,9 +33,8 @@ public class Store {
         while(size-->0) customers.add(new Customer(br));
         }
 
-    public Store(String name) {
-        this.name = name;
-    }
+    
+
     public String name() {
         return this.name;
     }

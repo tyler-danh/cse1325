@@ -44,7 +44,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -203,7 +202,7 @@ public class MainWin extends JFrame {
             filename = fc.getSelectedFile();         
             if(!filename.getAbsolutePath().endsWith(".elsa"))  
                 filename = new File(filename.getAbsolutePath() + ".elsa");
-            onSaveGameClick();                       
+            onSaveClick();                       
         }
     }
 
