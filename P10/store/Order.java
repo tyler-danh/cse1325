@@ -22,7 +22,7 @@ public class Order{
     public void save(BufferedWriter bw) throws IOException {
         bw.write(Long.toString(orderNumber) + '\n');
         this.customer.save(bw);
-        bw.write(computers.size() + '\n');
+        bw.write("" + computers.size() + '\n');
         for(Computer computer : computers)
             computer.save(bw);
     }
@@ -33,7 +33,7 @@ public class Order{
 
     public double totalCost(ArrayList<Computer> computers){
         double total = 0;
-        for(Computer computer : computers){total+=computer.cost;}
+        for(Computer computer : computers){total+=computer.cost();}
         return total;
     }
     
@@ -43,6 +43,7 @@ public class Order{
         for(Computer c : computers){
             result.append(c);
         }
+        result.append(this.totalCost(computers));
         return result.toString();
     }
 
