@@ -46,13 +46,13 @@ public class Customer implements Comparable<Customer>{
     }
     @Override
     public int compareTo(Customer c){
-        if(this.name.compareTo(c.name) < 0) return -1;
-        if(this.name.compareTo(c.name) == 0){
-            if(this.email.compareTo(c.email) < 0) return -1;
-            if(this.email.compareTo(c.email) == 0) return 0;
-            if(this.email.compareTo(c.email) > 0) return 1;
-        }
-        if(this.name.compareTo(c.name) > 0) return 1;
+       if(name.compareTo(c.name) < 0) return -1;
+       if(name.compareTo(c.name) > 0) return 1;
+
+       if(email.compareTo(c.email) < 0) return -1;
+       if(email.compareTo(c.email) > 0) return 1;
+
+       return 0;
     }
     private String name;
     private String email;
