@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import java.util.HashSet;
 import java.util.TreeSet;
+import java.util.Set;
 
 public class Store {
     public Store(String name) {
@@ -51,10 +52,10 @@ public class Store {
             order.save(bw);
 
     }
-    private static <T extends Comparable<? super T>> void save(BufferedWriter bw, Set<T> set){
+    /*private static <T extends Comparable<? super T>> void save(BufferedWriter bw, Set<T> set){
         bw.write("" + set.size() + '\n');
         for(T element : set){set.save(bw);}
-    }
+    }*/
    public String name() {
         return this.name;
     }

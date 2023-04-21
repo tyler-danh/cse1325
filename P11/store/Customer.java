@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Comparator;
 
-public class Customer implements Comparable{
+public class Customer implements Comparable<Customer>{
     public Customer(String name, String email) {
         int atIndex = email.indexOf('@', 0);
         int dotIndex = (atIndex >= 0) ? email.indexOf('@', 0) : -1;
@@ -43,6 +43,16 @@ public class Customer implements Comparable{
     @Override
     public int hashCode(){
         return Objects.hash(name, email);
+    }
+    @Override
+    public int compareTo(Customer c){
+        if(this.name.compareTo(c.name) < 0) return -1;
+        if(this.name.compareTo(c.name) == 0){
+            if(this.email.compareTo(c.email) < 0) return -1;
+            if(this.email.compareTo(c.email) == 0) return 0;
+            if(this.email.compareTo(c.email) > 0) return 1;
+        }
+        if(this.name.compareTo(c.name) > 0) return 1;
     }
     private String name;
     private String email;
