@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import java.util.Objects;
+
 public class Customer {
     public Customer(String name, String email) {
         int atIndex = email.indexOf('@', 0);
@@ -36,6 +38,10 @@ public class Customer {
         } catch (Exception e) {
             return false;
         }
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(name, email);
     }
     private String name;
     private String email;

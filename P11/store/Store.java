@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import java.util.HashSet;
+
 public class Store {
     public Store(String name) {
         this.name = name;
@@ -46,6 +48,9 @@ public class Store {
         bw.write("" + orders.size() + '\n');
         for(Order order : orders)
             order.save(bw);
+
+    }
+    private void <T extends Comparable<? super T>> save(BufferedWriter bw, Set set){
 
     }
    public String name() {
@@ -96,8 +101,8 @@ public class Store {
     // Fields
     
     private String name;
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<Option> options = new ArrayList<>();
-    private ArrayList<Computer> computers = new ArrayList<>();
-    private ArrayList<Order> orders = new ArrayList<>();
+    private HashSet<Customer> customers = new HashSet<>();
+    private HashSet<Option> options = new HashSet<>();
+    private HashSet<Computer> computers = new HashSet<>();
+    private HashSet<Order> orders = new HashSet<>();
 }

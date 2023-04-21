@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import java.util.Objects;
+
 public class Computer {
     public Computer(String name, String model) {
         this.name = name;
@@ -56,6 +58,10 @@ public class Computer {
         } catch (Exception e) {
             return false;
         }
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(name, model, options);
     }
     
     private String name;

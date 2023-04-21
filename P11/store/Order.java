@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import java.util.Objects;
+
 public class Order {
     public Order(Customer customer) {
         this.customer = customer;
@@ -63,6 +65,10 @@ public class Order {
         } catch (Exception e) {
             return false;
         }
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(customer, orderNumber, computers);
     }
 
     private Customer customer;
