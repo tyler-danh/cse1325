@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class Store {
     public Store(String name) {
@@ -50,8 +51,9 @@ public class Store {
             order.save(bw);
 
     }
-    private void <T extends Comparable<? super T>> save(BufferedWriter bw, Set set){
-
+    private static <T extends Comparable<? super T>> void save(BufferedWriter bw, Set<T> set){
+        bw.write("" + set.size() + '\n');
+        for(T element : set){set.save(bw);}
     }
    public String name() {
         return this.name;
@@ -101,7 +103,7 @@ public class Store {
     // Fields
     
     private String name;
-    private HashSet<Customer> customers = new HashSet<>();
+    private TreeSet<Customer> customers = new TreeSet<>();
     private HashSet<Option> options = new HashSet<>();
     private HashSet<Computer> computers = new HashSet<>();
     private HashSet<Order> orders = new HashSet<>();

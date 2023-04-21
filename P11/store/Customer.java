@@ -5,8 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import java.util.Objects;
+import java.util.Comparator;
 
-public class Customer {
+public class Customer implements Comparable{
     public Customer(String name, String email) {
         int atIndex = email.indexOf('@', 0);
         int dotIndex = (atIndex >= 0) ? email.indexOf('@', 0) : -1;
