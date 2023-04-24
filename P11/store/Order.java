@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import java.util.Objects;
 
-public class Order {
+public class Order implements Saveable{
     public Order(Customer customer) {
         this.customer = customer;
         this.orderNumber = nextOrderNumber++;
@@ -21,6 +21,7 @@ public class Order {
         while(numOptions-- > 0)
             computers.add(new Computer(br));
     }
+    @Override
     public void save(BufferedWriter bw) throws IOException {
         bw.write(Long.toString(orderNumber) + '\n');
         this.customer.save(bw);

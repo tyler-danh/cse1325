@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.Set;
 
-public class Store {
+public class Store implements Saveable{
     public Store(String name) {
         this.name = name;
     }
@@ -32,7 +32,7 @@ public class Store {
         while(numOptions-- > 0)
             orders.add(new Order(br));
     }
-    public void save(BufferedWriter bw) throws IOException {
+    /*public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         
         bw.write("" + customers.size() + '\n');
@@ -51,14 +51,23 @@ public class Store {
         for(Order order : orders)
             order.save(bw);
 
+    }*/
+    public void save(BufferedWriter bw){
+        save(bw, customers);
+        save(bw, computers);
+        save(bw, options);
+        save(bw, orders);
     }
-    private static <T extends Comparable<? super T>> void save(BufferedWriter bw, Set<T> set){
+    private static <T> void save(BufferedWriter bw, Set<T> set){
         bw.write("" + set.size() + '\n');
-        for(T element : set){set.save(bw);}
+        for(T element : set)
+            set.save(bw);
     }
+
    public String name() {
         return this.name;
     }
+    
     
     // ///////////////////////////////////////////////////////////
     // Customers

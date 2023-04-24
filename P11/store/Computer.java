@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import java.util.Objects;
 
-public class Computer {
+public class Computer implements Saveable{
     public Computer(String name, String model) {
         this.name = name;
         this.model = model;
@@ -20,6 +20,7 @@ public class Computer {
         while(numOptions-- > 0)
             options.add(new Option(br));
     }
+    @Override
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write(model + '\n');

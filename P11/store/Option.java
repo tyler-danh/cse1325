@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import java.util.Objects;
 
-public class Option {
+public class Option implements Saveable{
     public Option(String name, long cost) {
         if(cost < 0) throw new IllegalArgumentException("Negative cost for " + name + ": " + cost);
         this.name = name;
@@ -16,6 +16,7 @@ public class Option {
         this.name = br.readLine();
         this.cost = Long.parseLong(br.readLine());
     }
+    @Override
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + '\n');
         bw.write("" + Long.toString(cost) + '\n');
