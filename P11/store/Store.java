@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.Set;
 
-public class Store implements Saveable{
+public class Store{
     public Store(String name) {
         this.name = name;
     }
@@ -60,7 +60,7 @@ public class Store implements Saveable{
     }
     private void save(BufferedWriter bw, Set<? extends Saveable> set){
         bw.write("" + set.size() + '\n');
-        for(int i=0; i<set.size(); ++i)
+        for(var s : set)
             set.save(bw);
     }
 
