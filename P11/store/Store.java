@@ -58,9 +58,9 @@ public class Store implements Saveable{
         save(bw, options);
         save(bw, orders);
     }
-    private static <T> void save(BufferedWriter bw, Set<T> set){
+    private void save(BufferedWriter bw, Set<? extends Saveable> set){
         bw.write("" + set.size() + '\n');
-        for(T element : set)
+        for(int i=0; i<set.size(); ++i)
             set.save(bw);
     }
 
