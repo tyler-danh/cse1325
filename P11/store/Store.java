@@ -52,16 +52,16 @@ public class Store{
             order.save(bw);
 
     }*/
-    public void save(BufferedWriter bw){
+    public void save(BufferedWriter bw) throws IOException{
         save(bw, customers);
         save(bw, computers);
         save(bw, options);
         save(bw, orders);
     }
-    private void save(BufferedWriter bw, Set<? extends Saveable> set){
+    private void save(BufferedWriter bw, Set<? extends Saveable> set) throws IOException{
         bw.write("" + set.size() + '\n');
         for(var s : set)
-            set.save(bw);
+            s.save(bw);
     }
 
    public String name() {
