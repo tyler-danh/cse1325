@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.io.File;
 
-public class ThreadsOfSuduko {
+public class ThreadsOfSuduko{
     public static void main(String[] args) {
         
         try {
@@ -32,8 +32,30 @@ public class ThreadsOfSuduko {
             //   with a "thread ID" hard-coded as 1.
             // Your job is to rewrite this to create numThreads threads, with
             //   the set of Suduko candidate solutions split between them
-            //   (for example, 0 to 40 for the first thread and 41-81 for the second).           
-            solveSuds(0, suds.length-1, 1);
+            //   (for example, 0 to 40 for the first thread and 41-81 for the second).   
+
+            /*solveSuds(0, suds.length-1, 1);
+            Thread t1 = new Thread(solveSuds(0, suds.length-1, 1));
+            t1.start();*/
+
+            if(numThreads == 1){
+                solveSuds(0, suds.length-1, 1);
+            }
+            else{
+                try{
+                    Thread[] ts = new Thread[numThreads];
+                    for(int i=0; i<numThreads; ++i){
+                        final int threadID = i;
+                        ts[i] = new Thread(()-> solveSuds(0, suds.length-1, threadID));
+                        ts[i].start();
+                    }
+                    for(int i=0; i<numThreads; ++i){
+                        ts[i].join();
+                    }
+                }catch(InterruptedException e){
+                    System.err.println("Error: " + e);
+                }
+            }
 
             // END WORK HERE
                         
@@ -49,7 +71,7 @@ public class ThreadsOfSuduko {
     
     // WORK HERE
     // Be sure to protect the solutions ArrayList from Thread Interference!
-    private static void solveSuds(int first, int last, int id) {
+    private static synchronized void solveSuds(int first, int last, int id) {
         System.out.println("Thread " + id + " will solve " + first + " to " + last);
         for(int i=first; i<=last; ++i) {
             System.out.println("Thread " + id + " solving " + i);// + "\n\n" + suds[i]);
