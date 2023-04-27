@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.io.File;
+import java.util.Collections;
+import java.util.Set;
 
 public class ThreadsOfSuduko{
     public static void main(String[] args) {
@@ -45,16 +47,19 @@ public class ThreadsOfSuduko{
             else{
                 try{
                     int work = (suds.length-1) / numThreads;
-                    ArrayList<Integer> workList = new ArrayList<>();
+                    int start = 0;
+                    int end = work;
                     Thread[] ts = new Thread[numThreads];
-                    /*for(int i=0; i<suds.length-1; ++i){
-                        workList.add
-                    }*/
+
 
                     for(int i=0; i<numThreads; ++i){
                         final int threadID = i;
-                        ts[i] = new Thread(()-> solveSuds(0, suds.length-1, threadID));
+                        final int fstart = start;
+                        final int fend = end;
+                        ts[i] = new Thread(()-> solveSuds(fstart, fend, threadID));
                         ts[i].start();
+                        start = end;
+                        end += work;
                     }
                     for(int i=0; i<numThreads; ++i){
                         ts[i].join();
@@ -82,11 +87,12 @@ public class ThreadsOfSuduko{
         System.out.println("Thread " + id + " will solve " + first + " to " + last);
         for(int i=first; i<=last; ++i) {
             System.out.println("Thread " + id + " solving " + i);// + "\n\n" + suds[i]);
-            if(suds[i].solve()) solutions.add(suds[i]);
+            if(suds[i].solve()) syncSolutions.add(suds[i]);
         }
     }
     // END WORK HERE
     
     private static Suduko[] suds = new Suduko[81];
     private static HashSet<Suduko> solutions = new HashSet<>();
+    private static Set<Suduko> syncSolutions = Collections.synchronizedSet(solutions);
 }

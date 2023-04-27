@@ -1,0 +1,17 @@
+Windows PowerShell:
+Days              : 0
+Hours             : 0
+Minutes           : 1
+Seconds           : 38
+Milliseconds      : 446
+Ticks             : 984464445
+TotalDays         : 0.00113942644097222
+TotalHours        : 0.0273462345833333
+TotalMinutes      : 1.640774075
+TotalSeconds      : 98.4464445
+TotalMilliseconds : 98446.4445
+
+GitBash Shell:
+real    1m38.702s
+user    0m0.000s
+sys     0m0.000s
