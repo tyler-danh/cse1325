@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.io.File;
@@ -43,7 +44,13 @@ public class ThreadsOfSuduko{
             }
             else{
                 try{
+                    int work = (suds.length-1) / numThreads;
+                    ArrayList<Integer> workList = new ArrayList<>();
                     Thread[] ts = new Thread[numThreads];
+                    /*for(int i=0; i<suds.length-1; ++i){
+                        workList.add
+                    }*/
+
                     for(int i=0; i<numThreads; ++i){
                         final int threadID = i;
                         ts[i] = new Thread(()-> solveSuds(0, suds.length-1, threadID));
